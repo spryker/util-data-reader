@@ -6,3 +6,5 @@ parameters:
         - '#Method Spryker\\Service\\UtilDataReader\\Model\\BatchIterator\\.+BatchIterator::count\(\) should return int<0, max> but returns int.#'
         -
             identifier: missingType.iterableValue
+        -
+            identifier: varTag.nativeType
