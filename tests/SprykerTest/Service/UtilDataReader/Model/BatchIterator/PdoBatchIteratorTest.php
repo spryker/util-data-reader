@@ -9,6 +9,7 @@ namespace SprykerTest\Service\UtilDataReader\Model\BatchIterator;
 
 use Codeception\Test\Unit;
 use Propel\Generator\Model\PropelTypes;
+use Propel\Runtime\Propel;
 use Spryker\Service\UtilDataReader\Model\BatchIterator\PdoBatchIterator;
 use Spryker\Shared\SqlCriteriaBuilder\CriteriaBuilder\CriteriaBuilder;
 use Spryker\Shared\SqlCriteriaBuilder\CriteriaBuilder\CriteriaBuilderDependencyContainer;
@@ -58,7 +59,8 @@ class PdoBatchIteratorTest extends Unit
     {
         parent::setUp();
 
-        $this->queryContainer = $this->getMockForAbstractClass(AbstractQueryContainer::class);
+        $this->queryContainer = $this->createMock(AbstractQueryContainer::class);
+        $this->queryContainer->method('getConnection')->willReturn(Propel::getConnection());
 
         $columnsData = [[
             'name' => static::TESTING_COLUMN_NAME,
