@@ -52,9 +52,6 @@ class PdoBatchIteratorTest extends Unit
 
     protected const TESTING_COLUMN_TYPE = PropelTypes::INTEGER;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -69,9 +66,6 @@ class PdoBatchIteratorTest extends Unit
         $this->tester->createTable(static::TESTING_TABLE_NAME, $columnsData);
     }
 
-    /**
-     * @return void
-     */
     public function testCountShouldReturnNumbersOfRowsInBatch(): void
     {
         // Arrange
@@ -86,9 +80,6 @@ class PdoBatchIteratorTest extends Unit
         $this->assertSame($expectedCount, (int)$count);
     }
 
-    /**
-     * @return \Spryker\Service\UtilDataReader\Model\BatchIterator\PdoBatchIterator
-     */
     protected function createPdoBatchIterator(): PdoBatchIterator
     {
         $selectTestingQuery = sprintf('SELECT * FROM %s', static::TESTING_TABLE_NAME);
@@ -107,11 +98,6 @@ class PdoBatchIteratorTest extends Unit
         );
     }
 
-    /**
-     * @param int $numberOfRows
-     *
-     * @return void
-     */
     protected function addRowsToTestingTable(int $numberOfRows): void
     {
         $addRowQuery = sprintf(

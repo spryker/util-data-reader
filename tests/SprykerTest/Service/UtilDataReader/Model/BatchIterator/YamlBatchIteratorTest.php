@@ -27,9 +27,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 class YamlBatchIteratorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testThrowsExceptionIfFileNotValid(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIteratorWithInvalidFile();
@@ -39,9 +36,6 @@ class YamlBatchIteratorTest extends Unit
         $yamlBatchIterator->current();
     }
 
-    /**
-     * @return void
-     */
     public function testCurrentReturnsValidEntry(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -49,9 +43,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertNotNull($yamlBatchIterator->current());
     }
 
-    /**
-     * @return void
-     */
     public function testNextIncreasesOffset(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -62,9 +53,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertTrue($offset < $yamlBatchIterator->key(), 'Offset not increased');
     }
 
-    /**
-     * @return void
-     */
     public function testKeyReturnsCurrentOffset(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -72,9 +60,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertSame(0, $yamlBatchIterator->key(), 'Initial offset is not zero');
     }
 
-    /**
-     * @return void
-     */
     public function testValidReturnsFalseIfBatchDataIsNotInitialized(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -82,9 +67,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertFalse($yamlBatchIterator->valid(), 'batchData was expected to be not initialized');
     }
 
-    /**
-     * @return void
-     */
     public function testValidReturnsTrueIfBatchDataIsInitialized(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -93,9 +75,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertTrue($yamlBatchIterator->valid(), 'batchData was expected to be initialized');
     }
 
-    /**
-     * @return void
-     */
     public function testRewindResetOffset(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -105,9 +84,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertSame(0, $yamlBatchIterator->key(), 'Offset was not reset to zero');
     }
 
-    /**
-     * @return void
-     */
     public function testCountReturnsNumberOfRowsInBatchData(): void
     {
         $yamlBatchIterator = $this->getYamlBatchIterator();
@@ -115,9 +91,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertTrue($yamlBatchIterator->count() > 0, 'Count was expected to be higher then zero');
     }
 
-    /**
-     * @return void
-     */
     public function testIteratorWillReturnExpectedData(): void
     {
         //Arrange
@@ -134,9 +107,6 @@ class YamlBatchIteratorTest extends Unit
         $this->assertEquals($expectedData, $resultedData, 'Resulted data does not match expected result.');
     }
 
-    /**
-     * @return \Spryker\Service\UtilDataReader\Model\BatchIterator\YamlBatchIterator
-     */
     protected function getYamlBatchIterator(): YamlBatchIterator
     {
         $fileName = Configuration::dataDir() . '/BatchIterator/batchIterator.yml';
@@ -144,9 +114,6 @@ class YamlBatchIteratorTest extends Unit
         return $this->getBatchIterator($fileName);
     }
 
-    /**
-     * @return \Spryker\Service\UtilDataReader\Model\BatchIterator\YamlBatchIterator
-     */
     protected function getYamlBatchIteratorWithInvalidFile(): YamlBatchIterator
     {
         $fileName = Configuration::dataDir() . '/BatchIterator/notValid.yml';
@@ -154,11 +121,6 @@ class YamlBatchIteratorTest extends Unit
         return $this->getBatchIterator($fileName);
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return \Spryker\Service\UtilDataReader\Model\BatchIterator\YamlBatchIterator
-     */
     protected function getBatchIterator(string $fileName): YamlBatchIterator
     {
         $yamlReader = new YamlReaderBridge(new Yaml());

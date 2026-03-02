@@ -22,9 +22,6 @@ use Spryker\Service\UtilDataReader\UtilDataReaderService;
  */
 class UtilDataReaderServiceTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testGetYamlBatchIteratorReturnsCountableIterator(): void
     {
         $utilDataReaderService = new UtilDataReaderService();
