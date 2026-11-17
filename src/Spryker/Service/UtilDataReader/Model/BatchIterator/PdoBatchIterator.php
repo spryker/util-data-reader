@@ -87,13 +87,13 @@ class PdoBatchIterator implements CountableIteratorInterface
 
         $sqlPart = $this->criteriaBuilder->toSqlPart();
 
-        /** @var \Propel\Runtime\Connection\StatementInterface $st */
-        $st = $this->queryContainer
+        /** @var \Propel\Runtime\Connection\StatementInterface $statement */
+        $statement = $this->queryContainer
             ->getConnection()
             ->prepare($sqlPart->getSql());
-        $st->execute($sqlPart->getParameters());
+        $statement->execute($sqlPart->getParameters());
 
-        $this->batchData = $st->fetchAll(PDO::FETCH_ASSOC);
+        $this->batchData = $statement->fetchAll(PDO::FETCH_ASSOC);
         $this->offset += $this->chunkSize;
     }
 
@@ -156,11 +156,11 @@ class PdoBatchIterator implements CountableIteratorInterface
         $sqlPart = $this->criteriaBuilder->toSqlPart();
 
         $countSql = 'SELECT COUNT(*) cnt FROM (' . $sqlPart->getSql() . ') AS v';
-        /** @var \Propel\Runtime\Connection\StatementInterface $st */
-        $st = $this->queryContainer->getConnection()->prepare($countSql);
-        $st->execute($sqlPart->getParameters());
+        /** @var \Propel\Runtime\Connection\StatementInterface $statement */
+        $statement = $this->queryContainer->getConnection()->prepare($countSql);
+        $statement->execute($sqlPart->getParameters());
         /** @var int $count */
-        $count = $st->fetchColumn();
+        $count = $statement->fetchColumn();
 
         return $count;
     }
